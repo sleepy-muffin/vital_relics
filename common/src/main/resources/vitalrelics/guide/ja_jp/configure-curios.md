@@ -120,7 +120,57 @@ Vital Relicsは、設定変更の自由度が高く、データ駆動型のレ�
 - `max_health`
 - `armor`
 - `armor_toughness`
+- `attack_knockback`（攻撃ノックバック）
+- `luck`（幸運）
+- `movement_speed`（移動速度）
+- `swim_speed`（泳ぎ速度）
+- `nametag_distance`（名前タグ距離）
+- `gravity`（重力）
+- `step_height`（段差）
+- `max_absorption`（最大吸収）
+- `scale`（大きさ）
+- `safe_fall_distance`（安全落下距離）
+- `fall_damage_multiplier`（落下ダメージ倍率）
+- `jump_strength`（ジャンプ力）
+- `oxygen_bonus`（酸素ボーナス）
+- `burning_time`（燃焼時間）
+- `explosion_knockback_resistance`（爆発ノックバック耐性）
+- `water_movement_efficiency`（水中移動効率）
+- `movement_efficiency`（移動効率）
+- `block_break_speed`（ブロック破壊速度）
+- `mining_efficiency`（採掘効率）
+- `sneaking_speed`（スニーク速度）
+- `submerged_mining_speed`（水中採掘速度）
+- `sweeping_damage_ratio`（薙ぎ払いダメージ率）
+- `waypoint_transmit_range`（ウェイポイント送信距離）
+- `waypoint_receive_range`（ウェイポイント受信距離）
+- `camera_distance`（カメラ距離）
+- `below_name_distance`（ネームプレート距離）
+- `bounciness`（弾性）
+- `air_drag_modifier`（空気抵抗調整）
+- `friction_modifier`（摩擦調整）
 
+上記の項目はすべての対応ローダーで使用できます。`step_height` より後の項目は
+NeoForge 専用で、Forge 1.20.1 では無視されます。そのうち一部は古い NeoForge でも
+無視されます。以下を参照してください。
+
+全バージョン共通（Forge 1.20.1、NeoForge 1.21.1、1.21.8、26.2、26.3）：
+`attack_damage`、`attack_speed`、`armor`、`armor_toughness`、`knockback_resistance`、
+`max_health`、`block_interaction_range`、`entity_interaction_range`、
+`attack_knockback`、`luck`、`movement_speed`、`swim_speed`、`nametag_distance`、
+`gravity`、`step_height`
+
+NeoForge 専用：`max_absorption`、`scale`、`safe_fall_distance`、
+`fall_damage_multiplier`、`jump_strength`、`oxygen_bonus`、`burning_time`、
+`explosion_knockback_resistance`、`water_movement_efficiency`、
+`movement_efficiency`、`block_break_speed`、`mining_efficiency`、
+`sneaking_speed`、`submerged_mining_speed`、`sweeping_damage_ratio`
+
+NeoForge 1.21.8 以降：`waypoint_transmit_range`、`waypoint_receive_range`、
+`camera_distance`
+
+NeoForge 26.2 以降：`below_name_distance`、`bounciness`、
+`air_drag_modifier`、`friction_modifier`
 それぞれ `add`（加算）、`mul_base`（基本値への乗算）、`mul_total`（合計値への乗算）をサポートしています。
 
 例

@@ -122,7 +122,57 @@ Vital Relics 是一個高度可設定、基於數據的遺物系統。遺物在 
 - `max_health`（最大生命值）
 - `armor`（護甲值）
 - `armor_toughness`（護甲韌性）
+- `attack_knockback`（攻擊擊退）
+- `luck`（幸運）
+- `movement_speed`（移動速度）
+- `swim_speed`（游泳速度）
+- `nametag_distance`（名稱標籤距離）
+- `gravity`（重力）
+- `step_height`（台階高度）
+- `max_absorption`（傷害吸收上限）
+- `scale`（體型）
+- `safe_fall_distance`（安全墜落距離）
+- `fall_damage_multiplier`（摔落傷害倍率）
+- `jump_strength`（跳躍力）
+- `oxygen_bonus`（氧氣加成）
+- `burning_time`（燃燒時間）
+- `explosion_knockback_resistance`（爆炸擊退抗性）
+- `water_movement_efficiency`（水中移動效率）
+- `movement_efficiency`（移動效率）
+- `block_break_speed`（方塊破壞速度）
+- `mining_efficiency`（挖掘效率）
+- `sneaking_speed`（潛行速度）
+- `submerged_mining_speed`（水下挖掘速度）
+- `sweeping_damage_ratio`（橫掃傷害比例）
+- `waypoint_transmit_range`（路徑點發送距離）
+- `waypoint_receive_range`（路徑點接收距離）
+- `camera_distance`（攝影機距離）
+- `below_name_distance`（名稱標籤分數距離）
+- `bounciness`（彈性）
+- `air_drag_modifier`（空氣阻力調整）
+- `friction_modifier`（摩擦力調整）
 
+以上每一項在所有受支援的載入器上皆可使用。`step_height` 之後的條目僅由 NeoForge 提供，
+在 Forge 1.20.1 上會被忽略；其中部分條目在較舊的 NeoForge 版本上也會被忽略。
+詳見下面三個列表。
+
+所有版本可用（Forge 1.20.1、NeoForge 1.21.1、1.21.8、26.2、26.3）：
+`attack_damage`、`attack_speed`、`armor`、`armor_toughness`、`knockback_resistance`、
+`max_health`、`block_interaction_range`、`entity_interaction_range`、
+`attack_knockback`、`luck`、`movement_speed`、`swim_speed`、`nametag_distance`、
+`gravity`、`step_height`
+
+僅 NeoForge：`max_absorption`、`scale`、`safe_fall_distance`、
+`fall_damage_multiplier`、`jump_strength`、`oxygen_bonus`、`burning_time`、
+`explosion_knockback_resistance`、`water_movement_efficiency`、
+`movement_efficiency`、`block_break_speed`、`mining_efficiency`、
+`sneaking_speed`、`submerged_mining_speed`、`sweeping_damage_ratio`
+
+NeoForge 1.21.8 及更新：`waypoint_transmit_range`、`waypoint_receive_range`、
+`camera_distance`
+
+NeoForge 26.2 及更新：`below_name_distance`、`bounciness`、
+`air_drag_modifier`、`friction_modifier`
 各項均支援 `add`（加法）、`mul_base`（基礎乘法）和 `mul_total`（總值乘法）。
 
 範例

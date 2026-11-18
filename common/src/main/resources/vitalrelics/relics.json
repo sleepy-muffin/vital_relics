@@ -1036,7 +1036,7 @@
       "curio_slot": "feet",
       "rarity": "epic",
       "passive_skills": {
-        "innocence": 4
+        "innocence": 3
       },
       "granted_effects": {
         "jump_boost": 4

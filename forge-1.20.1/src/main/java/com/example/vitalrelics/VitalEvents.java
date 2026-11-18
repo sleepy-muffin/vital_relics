@@ -96,6 +96,34 @@ public final class VitalEvents {
 	private static final UUID BLOCK_REACH_MUL_ID = modifierId("block_interaction_range_mul_base");
 	private static final UUID BLOCK_REACH_MUL_TOTAL_ID = modifierId("block_interaction_range_mul_total");
 
+	private static final UUID MOVEMENT_SPEED_ADD_ID = modifierId("movement_speed_add");
+	private static final UUID MOVEMENT_SPEED_MUL_ID = modifierId("movement_speed_mul_base");
+	private static final UUID MOVEMENT_SPEED_MUL_TOTAL_ID = modifierId("movement_speed_mul_total");
+
+	private static final UUID ATTACK_KNOCKBACK_ADD_ID = modifierId("attack_knockback_add");
+	private static final UUID ATTACK_KNOCKBACK_MUL_ID = modifierId("attack_knockback_mul_base");
+	private static final UUID ATTACK_KNOCKBACK_MUL_TOTAL_ID = modifierId("attack_knockback_mul_total");
+
+	private static final UUID LUCK_ADD_ID = modifierId("luck_add");
+	private static final UUID LUCK_MUL_ID = modifierId("luck_mul_base");
+	private static final UUID LUCK_MUL_TOTAL_ID = modifierId("luck_mul_total");
+
+	private static final UUID SWIM_SPEED_ADD_ID = modifierId("swim_speed_add");
+	private static final UUID SWIM_SPEED_MUL_ID = modifierId("swim_speed_mul_base");
+	private static final UUID SWIM_SPEED_MUL_TOTAL_ID = modifierId("swim_speed_mul_total");
+
+	private static final UUID NAMETAG_DISTANCE_ADD_ID = modifierId("nametag_distance_add");
+	private static final UUID NAMETAG_DISTANCE_MUL_ID = modifierId("nametag_distance_mul_base");
+	private static final UUID NAMETAG_DISTANCE_MUL_TOTAL_ID = modifierId("nametag_distance_mul_total");
+
+	private static final UUID GRAVITY_ADD_ID = modifierId("gravity_add");
+	private static final UUID GRAVITY_MUL_ID = modifierId("gravity_mul_base");
+	private static final UUID GRAVITY_MUL_TOTAL_ID = modifierId("gravity_mul_total");
+
+	private static final UUID STEP_HEIGHT_ADD_ID = modifierId("step_height_add");
+	private static final UUID STEP_HEIGHT_MUL_ID = modifierId("step_height_mul_base");
+	private static final UUID STEP_HEIGHT_MUL_TOTAL_ID = modifierId("step_height_mul_total");
+
 	private static final UUID ENTITY_REACH_ADD_ID = modifierId("entity_interaction_range_add");
 	private static final UUID ENTITY_REACH_MUL_ID = modifierId("entity_interaction_range_mul_base");
 	private static final UUID ENTITY_REACH_MUL_TOTAL_ID = modifierId("entity_interaction_range_mul_total");
@@ -106,23 +134,37 @@ public final class VitalEvents {
 			UUID mulBaseId,
 			UUID mulTotalId) {}
 
-	private static final Map<String, PropertyTarget> PROPERTY_TARGETS = Map.of(
-			"attack_damage", new PropertyTarget(Attributes.ATTACK_DAMAGE,
-					ATTACK_DAMAGE_ADD_ID, ATTACK_DAMAGE_MUL_ID, ATTACK_DAMAGE_MUL_TOTAL_ID),
-			"attack_speed", new PropertyTarget(Attributes.ATTACK_SPEED,
-					ATTACK_SPEED_ADD_ID, ATTACK_SPEED_MUL_ID, ATTACK_SPEED_MUL_TOTAL_ID),
-			"armor", new PropertyTarget(Attributes.ARMOR,
-					ARMOR_ADD_ID, ARMOR_MUL_ID, ARMOR_MUL_TOTAL_ID),
-			"armor_toughness", new PropertyTarget(Attributes.ARMOR_TOUGHNESS,
-					ARMOR_TOUGHNESS_ADD_ID, ARMOR_TOUGHNESS_MUL_ID, ARMOR_TOUGHNESS_MUL_TOTAL_ID),
-			"knockback_resistance", new PropertyTarget(Attributes.KNOCKBACK_RESISTANCE,
-					KNOCKBACK_RESISTANCE_ADD_ID, KNOCKBACK_RESISTANCE_MUL_ID, KNOCKBACK_RESISTANCE_MUL_TOTAL_ID),
-			"max_health", new PropertyTarget(Attributes.MAX_HEALTH,
-					MAX_HEALTH_ADD_ID, MAX_HEALTH_MUL_ID, MAX_HEALTH_MUL_TOTAL_ID),
-			"block_interaction_range", new PropertyTarget(ForgeMod.BLOCK_REACH.get(),
-					BLOCK_REACH_ADD_ID, BLOCK_REACH_MUL_ID, BLOCK_REACH_MUL_TOTAL_ID),
-			"entity_interaction_range", new PropertyTarget(ForgeMod.ENTITY_REACH.get(),
-					ENTITY_REACH_ADD_ID, ENTITY_REACH_MUL_ID, ENTITY_REACH_MUL_TOTAL_ID)
+	private static final Map<String, PropertyTarget> PROPERTY_TARGETS = Map.ofEntries(
+			Map.entry("attack_damage", new PropertyTarget(Attributes.ATTACK_DAMAGE,
+					ATTACK_DAMAGE_ADD_ID, ATTACK_DAMAGE_MUL_ID, ATTACK_DAMAGE_MUL_TOTAL_ID)),
+			Map.entry("attack_speed", new PropertyTarget(Attributes.ATTACK_SPEED,
+					ATTACK_SPEED_ADD_ID, ATTACK_SPEED_MUL_ID, ATTACK_SPEED_MUL_TOTAL_ID)),
+			Map.entry("armor", new PropertyTarget(Attributes.ARMOR,
+					ARMOR_ADD_ID, ARMOR_MUL_ID, ARMOR_MUL_TOTAL_ID)),
+			Map.entry("armor_toughness", new PropertyTarget(Attributes.ARMOR_TOUGHNESS,
+					ARMOR_TOUGHNESS_ADD_ID, ARMOR_TOUGHNESS_MUL_ID, ARMOR_TOUGHNESS_MUL_TOTAL_ID)),
+			Map.entry("knockback_resistance", new PropertyTarget(Attributes.KNOCKBACK_RESISTANCE,
+					KNOCKBACK_RESISTANCE_ADD_ID, KNOCKBACK_RESISTANCE_MUL_ID, KNOCKBACK_RESISTANCE_MUL_TOTAL_ID)),
+			Map.entry("max_health", new PropertyTarget(Attributes.MAX_HEALTH,
+					MAX_HEALTH_ADD_ID, MAX_HEALTH_MUL_ID, MAX_HEALTH_MUL_TOTAL_ID)),
+			Map.entry("block_interaction_range", new PropertyTarget(ForgeMod.BLOCK_REACH.get(),
+					BLOCK_REACH_ADD_ID, BLOCK_REACH_MUL_ID, BLOCK_REACH_MUL_TOTAL_ID)),
+			Map.entry("entity_interaction_range", new PropertyTarget(ForgeMod.ENTITY_REACH.get(),
+					ENTITY_REACH_ADD_ID, ENTITY_REACH_MUL_ID, ENTITY_REACH_MUL_TOTAL_ID)),
+			Map.entry("movement_speed", new PropertyTarget(Attributes.MOVEMENT_SPEED,
+					MOVEMENT_SPEED_ADD_ID, MOVEMENT_SPEED_MUL_ID, MOVEMENT_SPEED_MUL_TOTAL_ID)),
+			Map.entry("attack_knockback", new PropertyTarget(Attributes.ATTACK_KNOCKBACK,
+					ATTACK_KNOCKBACK_ADD_ID, ATTACK_KNOCKBACK_MUL_ID, ATTACK_KNOCKBACK_MUL_TOTAL_ID)),
+			Map.entry("luck", new PropertyTarget(Attributes.LUCK,
+					LUCK_ADD_ID, LUCK_MUL_ID, LUCK_MUL_TOTAL_ID)),
+			Map.entry("swim_speed", new PropertyTarget(ForgeMod.SWIM_SPEED.get(),
+					SWIM_SPEED_ADD_ID, SWIM_SPEED_MUL_ID, SWIM_SPEED_MUL_TOTAL_ID)),
+			Map.entry("nametag_distance", new PropertyTarget(ForgeMod.NAMETAG_DISTANCE.get(),
+					NAMETAG_DISTANCE_ADD_ID, NAMETAG_DISTANCE_MUL_ID, NAMETAG_DISTANCE_MUL_TOTAL_ID)),
+			Map.entry("gravity", new PropertyTarget(ForgeMod.ENTITY_GRAVITY.get(),
+					GRAVITY_ADD_ID, GRAVITY_MUL_ID, GRAVITY_MUL_TOTAL_ID)),
+			Map.entry("step_height", new PropertyTarget(ForgeMod.STEP_HEIGHT_ADDITION.get(),
+					STEP_HEIGHT_ADD_ID, STEP_HEIGHT_MUL_ID, STEP_HEIGHT_MUL_TOTAL_ID))
 	);
 
 	private VitalEvents() {}

@@ -135,6 +135,57 @@ no longer requires adding a field to this class or a parser branch.
 - `max_health`
 - `armor`
 - `armor_toughness`
+- `attack_knockback`
+- `luck`
+- `movement_speed`
+- `swim_speed`
+- `nametag_distance`
+- `gravity`
+- `step_height`
+- `max_absorption`
+- `scale`
+- `safe_fall_distance`
+- `fall_damage_multiplier`
+- `jump_strength`
+- `oxygen_bonus`
+- `burning_time`
+- `explosion_knockback_resistance`
+- `water_movement_efficiency`
+- `movement_efficiency`
+- `block_break_speed`
+- `mining_efficiency`
+- `sneaking_speed`
+- `submerged_mining_speed`
+- `sweeping_damage_ratio`
+- `waypoint_transmit_range`
+- `waypoint_receive_range`
+- `camera_distance`
+- `below_name_distance`
+- `bounciness`
+- `air_drag_modifier`
+- `friction_modifier`
+
+Every entry above works on every supported loader. The ones after `step_height`
+are provided by NeoForge only and are ignored on Forge 1.20.1; some of those are
+ignored on older NeoForge versions too. Check the two lists below.
+
+Available everywhere (Forge 1.20.1, NeoForge 1.21.1, 1.21.8, 26.2, 26.3):
+`attack_damage`, `attack_speed`, `armor`, `armor_toughness`, `knockback_resistance`,
+`max_health`, `block_interaction_range`, `entity_interaction_range`,
+`attack_knockback`, `luck`, `movement_speed`, `swim_speed`, `nametag_distance`,
+`gravity`, `step_height`
+
+NeoForge only: `max_absorption`, `scale`, `safe_fall_distance`,
+`fall_damage_multiplier`, `jump_strength`, `oxygen_bonus`, `burning_time`,
+`explosion_knockback_resistance`, `water_movement_efficiency`,
+`movement_efficiency`, `block_break_speed`, `mining_efficiency`,
+`sneaking_speed`, `submerged_mining_speed`, `sweeping_damage_ratio`
+
+NeoForge 1.21.8 and newer: `waypoint_transmit_range`, `waypoint_receive_range`,
+`camera_distance`
+
+NeoForge 26.2 and newer: `below_name_distance`, `bounciness`,
+`air_drag_modifier`, `friction_modifier`
 
 Each supports `add`, `mul_base`, and `mul_total`.
 

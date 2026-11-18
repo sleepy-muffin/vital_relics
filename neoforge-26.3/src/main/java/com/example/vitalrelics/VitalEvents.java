@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -101,7 +102,36 @@ public final class VitalEvents {
             propertyTarget("knockback_resistance", Attributes.KNOCKBACK_RESISTANCE),
             propertyTarget("max_health", Attributes.MAX_HEALTH),
             propertyTarget("block_interaction_range", Attributes.BLOCK_INTERACTION_RANGE),
-            propertyTarget("entity_interaction_range", Attributes.ENTITY_INTERACTION_RANGE)
+            propertyTarget("entity_interaction_range", Attributes.ENTITY_INTERACTION_RANGE),
+            propertyTarget("movement_speed", Attributes.MOVEMENT_SPEED),
+            propertyTarget("attack_knockback", Attributes.ATTACK_KNOCKBACK),
+            propertyTarget("luck", Attributes.LUCK),
+            propertyTarget("swim_speed", NeoForgeMod.SWIM_SPEED),
+            propertyTarget("nametag_distance", Attributes.NAME_TAG_DISTANCE),
+            propertyTarget("gravity", Attributes.GRAVITY),
+            propertyTarget("step_height", Attributes.STEP_HEIGHT),
+            propertyTarget("max_absorption", Attributes.MAX_ABSORPTION),
+            propertyTarget("scale", Attributes.SCALE),
+            propertyTarget("safe_fall_distance", Attributes.SAFE_FALL_DISTANCE),
+            propertyTarget("fall_damage_multiplier", Attributes.FALL_DAMAGE_MULTIPLIER),
+            propertyTarget("jump_strength", Attributes.JUMP_STRENGTH),
+            propertyTarget("oxygen_bonus", Attributes.OXYGEN_BONUS),
+            propertyTarget("burning_time", Attributes.BURNING_TIME),
+            propertyTarget("explosion_knockback_resistance", Attributes.EXPLOSION_KNOCKBACK_RESISTANCE),
+            propertyTarget("water_movement_efficiency", Attributes.WATER_MOVEMENT_EFFICIENCY),
+            propertyTarget("movement_efficiency", Attributes.MOVEMENT_EFFICIENCY),
+            propertyTarget("block_break_speed", Attributes.BLOCK_BREAK_SPEED),
+            propertyTarget("mining_efficiency", Attributes.MINING_EFFICIENCY),
+            propertyTarget("sneaking_speed", Attributes.SNEAKING_SPEED),
+            propertyTarget("submerged_mining_speed", Attributes.SUBMERGED_MINING_SPEED),
+            propertyTarget("sweeping_damage_ratio", Attributes.SWEEPING_DAMAGE_RATIO),
+            propertyTarget("waypoint_transmit_range", Attributes.WAYPOINT_TRANSMIT_RANGE),
+            propertyTarget("waypoint_receive_range", Attributes.WAYPOINT_RECEIVE_RANGE),
+            propertyTarget("camera_distance", Attributes.CAMERA_DISTANCE),
+            propertyTarget("below_name_distance", Attributes.BELOW_NAME_DISTANCE),
+            propertyTarget("bounciness", Attributes.BOUNCINESS),
+            propertyTarget("air_drag_modifier", Attributes.AIR_DRAG_MODIFIER),
+            propertyTarget("friction_modifier", Attributes.FRICTION_MODIFIER)
     );
 
     private VitalEvents() {
