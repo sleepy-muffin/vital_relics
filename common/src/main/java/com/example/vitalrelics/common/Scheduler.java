@@ -99,7 +99,14 @@ public class Scheduler {
 	private final MyMap<Integer> ARROW_DEFLECTION_COOLDOWN_LIST = new MyMap<>();
 	private final MyMap<Integer> AUTO_MOVE_SUPPRESSION_LIST = new MyMap<>();
 
-	private static final int DELAYED_TASK_LIST_MAX = 12;
+	private static final int DELAYED_TASK_LIST_MAX = 24;
+
+	/**
+	 * Above this many pending tasks for one entity the scheduler switches to
+	 * {@code alternative_task_delay_ticks}, so a burst does not stall.
+	 */
+	private static final int DELAYED_TASK_CONGESTION_THRESHOLD =
+			DELAYED_TASK_LIST_MAX / 2;
 
 	/*
 	Scheduler Management
@@ -117,7 +124,7 @@ public class Scheduler {
 
 			final List<DelayTask> snapshot = tasks.snapshot();
 			final boolean useAlternativeDelay =
-					snapshot.size() >= DELAYED_TASK_LIST_MAX / 2;
+					snapshot.size() >= DELAYED_TASK_CONGESTION_THRESHOLD;
 
 			for (final DelayTask task : snapshot) {
 				task.currentTickCount++;
@@ -299,7 +306,6 @@ public class Scheduler {
 	 */
 
 	public void addDelayedTask(UUID uuid, DelayTask task, int current_tick_count) {
-		final int DELAYED_TASK_LIST_MAX = 24;
 
 		try {
 			DELAYED_TASK_LIST.get_lock().lock();
