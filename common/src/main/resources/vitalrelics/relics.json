@@ -637,7 +637,272 @@
       }
     },
     {
+      "id": "starfall_pendant",
+      "display_name": "Starfall Pendant",
+      "tooltip": "A sliver of fallen star that tilts fortune in your favour.",
+      "texture": "starfall_pendant.png",
+      "curio_slot": "necklace",
+      "rarity": "uncommon",
+      "granted_effects": {
+        "night_vision": 1
+      },
+      "properties": {
+        "luck": {
+          "add": 1
+        }
+      }
+    },
+    {
+      "id": "tidebound_amulet",
+      "display_name": "Tidebound Amulet",
+      "tooltip": "A cold pearl that lets you move through water as if it were air.",
+      "texture": "tidebound_amulet.png",
+      "curio_slot": "necklace",
+      "rarity": "uncommon",
+      "granted_effects": {
+        "water_breathing": 1
+      },
+      "properties": {
+        "swim_speed": {
+          "add": 0.25
+        },
+        "max_health": {
+          "add": 4
+        }
+      }
+    },
+    {
+      "id": "stormwoven_pendant",
+      "display_name": "Stormwoven Pendant",
+      "tooltip": "Woven from a gale, it throws your foes back and hurries your stride.",
+      "texture": "stormwoven_pendant.png",
+      "curio_slot": "necklace",
+      "rarity": "rare",
+      "properties": {
+        "attack_knockback": {
+          "add": 2.0
+        },
+        "movement_speed": {
+          "add": 0.02
+        },
+        "armor": {
+          "add": 3
+        }
+      },
+      "callbacks": {
+        "damage_taken": {
+          "modifier": 0.94
+        }
+      }
+    },
+    {
+      "id": "duskleaf_amulet",
+      "display_name": "Duskleaf Amulet",
+      "tooltip": "A dusky leaf pressed in silver, it quietly mends the wearer.",
+      "texture": "duskleaf_amulet.png",
+      "curio_slot": "necklace",
+      "rarity": "rare",
+      "immune_to_effects": [
+        "poison"
+      ],
+      "properties": {
+        "max_health": {
+          "add": 8
+        },
+        "armor_toughness": {
+          "add": 2
+        }
+      },
+      "ticks": {
+        "heal": {
+          "interval_ticks": 60,
+          "add": 1
+        }
+      },
+      "callbacks": {
+        "damage_taken": {
+          "modifier": 0.92,
+          "ratio_maximum": 0.6
+        }
+      }
+    },
+    {
+      "id": "sunforged_circlet",
+      "display_name": "Sunforged Circlet",
+      "tooltip": "A band of warm gold that lends every blow a little of the sun.",
+      "texture": "sunforged_circlet.png",
+      "curio_slot": "head",
+      "rarity": "uncommon",
+      "properties": {
+        "attack_damage": {
+          "add": 2
+        },
+        "armor": {
+          "add": 2
+        }
+      }
+    },
+    {
+      "id": "ironvine_circlet",
+      "display_name": "Ironvine Circlet",
+      "tooltip": "A circlet of iron vine that barely yields to a blow.",
+      "texture": "ironvine_circlet.png",
+      "curio_slot": "head",
+      "rarity": "uncommon",
+      "immune_to_effects": [
+        "slowness"
+      ],
+      "properties": {
+        "knockback_resistance": {
+          "add": 0.3
+        },
+        "armor_toughness": {
+          "add": 2
+        }
+      }
+    },
+    {
+      "id": "moonstone_circlet",
+      "display_name": "Moonstone Circlet",
+      "tooltip": "A pale moonstone band that steadies the wearer and improves their fortune.",
+      "texture": "moonstone_circlet.png",
+      "curio_slot": "head",
+      "rarity": "rare",
+      "properties": {
+        "luck": {
+          "add": 1
+        },
+        "max_health": {
+          "add": 6
+        },
+        "armor": {
+          "add": 3
+        }
+      },
+      "ticks": {
+        "heal": {
+          "interval_ticks": 60,
+          "add": 1
+        }
+      }
+    },
+    {
+      "id": "gloomweave_circlet",
+      "display_name": "Gloomweave Circlet",
+      "tooltip": "A circlet of shadowed thread that swallows the light and softens blows.",
+      "texture": "gloomweave_circlet.png",
+      "curio_slot": "head",
+      "rarity": "rare",
+      "granted_effects": {
+        "night_vision": 1
+      },
+      "properties": {
+        "movement_speed": {
+          "add": 0.015
+        },
+        "armor": {
+          "add": 4
+        }
+      },
+      "callbacks": {
+        "damage_taken": {
+          "modifier": 0.94
+        }
+      }
+    },
+    {
+      "id": "wanderers_anklet",
+      "display_name": "Wanderer's Anklet",
+      "tooltip": "A travelling charm that lengthens your stride and lifts your step.",
+      "texture": "wanderers_anklet.png",
+      "curio_slot": "feet",
+      "rarity": "uncommon",
+      "properties": {
+        "movement_speed": {
+          "add": 0.02
+        },
+        "step_height": {
+          "add": 0.5
+        }
+      }
+    },
+    {
+      "id": "featherfall_anklet",
+      "display_name": "Featherfall Anklet",
+      "tooltip": "A down-soft anklet that makes every fall a slow drift.",
+      "texture": "featherfall_anklet.png",
+      "curio_slot": "feet",
+      "rarity": "uncommon",
+      "properties": {
+        "gravity": {
+          "add": -0.08
+        }
+      }
+    },
+    {
+      "id": "nightstride_anklet",
+      "display_name": "Nightstride Anklet",
+      "tooltip": "A quick anklet for the dark hours; it hastens your feet and your hands.",
+      "texture": "nightstride_anklet.png",
+      "curio_slot": "feet",
+      "rarity": "rare",
+      "immune_to_effects": [
+        "slowness"
+      ],
+      "properties": {
+        "movement_speed": {
+          "add": 0.03
+        },
+        "attack_speed": {
+          "mul_total": 1.06
+        },
+        "knockback_resistance": {
+          "add": 0.3
+        }
+      }
+    },
+    {
+      "id": "galeswept_anklet",
+      "display_name": "Galeswept Anklet",
+      "tooltip": "An anklet wound from wind and spray, it carries you over land and sea alike.",
+      "texture": "galeswept_anklet.png",
+      "curio_slot": "feet",
+      "rarity": "rare",
+      "properties": {
+        "swim_speed": {
+          "add": 0.3
+        },
+        "movement_speed": {
+          "add": 0.02
+        },
+        "attack_knockback": {
+          "add": 1.0
+        },
+        "step_height": {
+          "add": 0.5
+        }
+      }
+    },
+    {
+      "id": "aether_wings",
+      "display_name": "Aether Wings",
+      "tooltip": "Lesser wings of aether; they match the Celestial Wings in flight, but reach less far.",
+      "texture": "aether_wings.png",
+      "curio_slot": "back",
+      "rarity": "rare",
+      "passive_skills": {
+        "flight": 1
+      },
+      "available_spells": {
+        "teleport": {
+          "range": 30,
+          "recovery": 0.25
+        }
+      }
+    },
+    {
       "id": "celestial_wings",
+      "display_name": "Celestial Wings",
       "texture": "celestial_wings.png",
       "curio_slot": "back",
       "rarity": "epic",

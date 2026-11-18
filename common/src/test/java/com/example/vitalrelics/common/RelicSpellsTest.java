@@ -17,6 +17,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class RelicSpellsTest {
 
+	private static Relic relic(final String id, final String rarity, final Object... spells) {
+		final Relic relic = new Relic();
+		relic.id = id;
+		relic.rarity = rarity;
+
+		for (int i = 0; i < spells.length; i += 2)
+			relic.available_spells.put((String) spells[i], (Relic.Spells.Info) spells[i + 1]);
+
+		return relic;
+	}
+
 	private static Relic.Spells.Info spell(final Object... pairs) {
 		final Relic.Spells.Info info = new Relic.Spells.Info();
 
@@ -98,13 +109,13 @@ class RelicSpellsTest {
 
 	@Test
 	void gatherSpellsKeepsTheBestEntryAndInsertionOrder() {
-		final Relic first = new Relic();
-		first.available_spells.put("a", spell("priority", 1));
-		first.available_spells.put("b", spell("priority", 5));
+		final Relic first = relic("first", "uncommon",
+				"a", spell("priority", 1),
+				"b", spell("priority", 5));
 
-		final Relic second = new Relic();
-		second.available_spells.put("b", spell("priority", 9));
-		second.available_spells.put("c", spell("priority", 2));
+		final Relic second = relic("second", "rare",
+				"b", spell("priority", 9),
+				"c", spell("priority", 2));
 
 		final Map<String, Relic.Spells.Info> result =
 				RelicSpells.gatherSpells(List.of(first, second));
@@ -115,15 +126,71 @@ class RelicSpellsTest {
 
 	@Test
 	void gatherSpellsKeepsAnEarlierStrongerEntry() {
-		final Relic first = new Relic();
-		first.available_spells.put("a", spell("priority", 1));
-
-		final Relic second = new Relic();
-		second.available_spells.put("a", spell("priority", 0));
+		final Relic first = relic("first", "rare", "a", spell("priority", 1));
+		final Relic second = relic("second", "common", "a", spell("priority", 0));
 
 		final Map<String, Relic.Spells.Info> result =
 				RelicSpells.gatherSpells(List.of(first, second));
 
 		assertSame(first.available_spells.get("a"), result.get("a"));
+	}
+
+	@Test
+	void aHigherTierSpellWinsRegardlessOfPriority() {
+		final Relic low = relic("low", "rare",
+				"teleport", spell("range", 30, "recovery", 0.25, "priority", 100));
+		final Relic high = relic("high", "epic",
+				"teleport", spell("range", 50, "recovery", 0.25));
+
+		assertSame(high.available_spells.get("teleport"),
+				RelicSpells.gatherSpells(List.of(low, high)).get("teleport"));
+		assertSame(high.available_spells.get("teleport"),
+				RelicSpells.gatherSpells(List.of(high, low)).get("teleport"));
+	}
+
+	@Test
+	void tierOrderRunsFromCommonToEpic() {
+		assertEquals(0, RelicSpells.tierRank("common"));
+		assertEquals(1, RelicSpells.tierRank("uncommon"));
+		assertEquals(2, RelicSpells.tierRank("rare"));
+		assertEquals(3, RelicSpells.tierRank("epic"));
+	}
+
+	@Test
+	void priorityBreaksTiesWithinOneTier() {
+		final Relic base = relic("base", "rare", "a", spell("priority", 1));
+		final Relic candidate = relic("candidate", "rare", "a", spell("priority", 2));
+
+		assertTrue(RelicSpells.isTheSpellBetter(
+				base, base.available_spells.get("a"),
+				candidate, candidate.available_spells.get("a")));
+	}
+
+	@Test
+	void theSameSpellOnTwoRelicsOfOneTierIsRejected() {
+		final Relic first = relic("first", "rare", "teleport", spell("range", 30));
+		final Relic second = relic("second", "rare", "teleport", spell("range", 50));
+
+		final IllegalArgumentException error = assertThrows(
+				IllegalArgumentException.class,
+				() -> RelicSpells.checkNoSameTierSpellDuplicates(List.of(first, second)));
+
+		assertTrue(error.getMessage().contains("teleport"));
+		assertTrue(error.getMessage().contains("rare"));
+	}
+
+	@Test
+	void theSameSpellOnDifferentTiersIsAllowed() {
+		final Relic low = relic("low", "rare", "teleport", spell("range", 30));
+		final Relic high = relic("high", "epic", "teleport", spell("range", 50));
+
+		RelicSpells.checkNoSameTierSpellDuplicates(List.of(low, high));
+	}
+
+	@Test
+	void theSameSpellTwiceOnOneRelicIsNotADuplicate() {
+		final Relic one = relic("one", "rare", "teleport", spell("range", 30));
+
+		RelicSpells.checkNoSameTierSpellDuplicates(List.of(one));
 	}
 }

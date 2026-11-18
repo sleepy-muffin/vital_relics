@@ -1019,6 +1019,188 @@
         "K": "vitalrelics:rare_relic_core"
       },
       "count": 1
+    },
+    "starfall_pendant": {
+      "type": "shaped",
+      "pattern": [
+        " G ",
+        "GKG",
+        " f "
+      ],
+      "key": {
+        "G": "minecraft:gold_nugget",
+        "K": "vitalrelics:uncommon_relic_core",
+        "f": "minecraft:glowstone_dust"
+      },
+      "count": 1
+    },
+    "tidebound_amulet": {
+      "type": "shaped",
+      "pattern": [
+        " P ",
+        "SKS",
+        " p "
+      ],
+      "key": {
+        "P": "minecraft:prismarine_shard",
+        "S": "minecraft:string",
+        "K": "vitalrelics:uncommon_relic_core",
+        "p": "minecraft:prismarine_crystals"
+      },
+      "count": 1
+    },
+    "stormwoven_pendant": {
+      "type": "shaped",
+      "pattern": [
+        " F ",
+        "FKE",
+        " e "
+      ],
+      "key": {
+        "F": "minecraft:feather",
+        "E": "minecraft:phantom_membrane",
+        "K": "vitalrelics:rare_relic_core",
+        "e": "minecraft:gunpowder"
+      },
+      "count": 1
+    },
+    "duskleaf_amulet": {
+      "type": "shaped",
+      "pattern": [
+        " L ",
+        "LKL",
+        " s "
+      ],
+      "key": {
+        "L": "minecraft:oak_leaves",
+        "K": "vitalrelics:rare_relic_core",
+        "s": "minecraft:string"
+      },
+      "count": 1
+    },
+    "sunforged_circlet": {
+      "type": "shaped",
+      "pattern": [
+        " g ",
+        "GKG",
+        "   "
+      ],
+      "key": {
+        "g": "minecraft:gold_ingot",
+        "G": "minecraft:gold_nugget",
+        "K": "vitalrelics:uncommon_relic_core"
+      },
+      "count": 1
+    },
+    "ironvine_circlet": {
+      "type": "shaped",
+      "pattern": [
+        " I ",
+        "IKI",
+        "   "
+      ],
+      "key": {
+        "I": "minecraft:iron_ingot",
+        "K": "vitalrelics:uncommon_relic_core"
+      },
+      "count": 1
+    },
+    "moonstone_circlet": {
+      "type": "shaped",
+      "pattern": [
+        " Q ",
+        "QKQ",
+        "   "
+      ],
+      "key": {
+        "Q": "minecraft:quartz",
+        "K": "vitalrelics:rare_relic_core"
+      },
+      "count": 1
+    },
+    "gloomweave_circlet": {
+      "type": "shaped",
+      "pattern": [
+        " O ",
+        "OKO",
+        "   "
+      ],
+      "key": {
+        "O": "minecraft:obsidian",
+        "K": "vitalrelics:rare_relic_core"
+      },
+      "count": 1
+    },
+    "wanderers_anklet": {
+      "type": "shaped",
+      "pattern": [
+        "L L",
+        "SKS",
+        "   "
+      ],
+      "key": {
+        "L": "minecraft:leather",
+        "S": "minecraft:string",
+        "K": "vitalrelics:uncommon_relic_core"
+      },
+      "count": 1
+    },
+    "featherfall_anklet": {
+      "type": "shaped",
+      "pattern": [
+        "F F",
+        "SKS",
+        "   "
+      ],
+      "key": {
+        "F": "minecraft:feather",
+        "S": "minecraft:string",
+        "K": "vitalrelics:uncommon_relic_core"
+      },
+      "count": 1
+    },
+    "nightstride_anklet": {
+      "type": "shaped",
+      "pattern": [
+        "B B",
+        "EKE",
+        "   "
+      ],
+      "key": {
+        "B": "minecraft:black_dye",
+        "E": "minecraft:ender_pearl",
+        "K": "vitalrelics:rare_relic_core"
+      },
+      "count": 1
+    },
+    "galeswept_anklet": {
+      "type": "shaped",
+      "pattern": [
+        "P P",
+        "EKE",
+        "   "
+      ],
+      "key": {
+        "P": "minecraft:prismarine_crystals",
+        "E": "minecraft:phantom_membrane",
+        "K": "vitalrelics:rare_relic_core"
+      },
+      "count": 1
+    },
+    "aether_wings": {
+      "type": "shaped",
+      "pattern": [
+        "MEM",
+        "PKP",
+        "P P"
+      ],
+      "key": {
+        "M": "minecraft:phantom_membrane",
+        "E": "minecraft:elytra",
+        "P": "minecraft:feather",
+        "K": "vitalrelics:rare_relic_core"
+      },
+      "count": 1
     }
   },
   "loot": {
@@ -1653,6 +1835,136 @@
       {
         "table": "minecraft:chests/buried_treasure",
         "chance": 0.04
+      }
+    ],
+    "starfall_pendant": [
+      {
+        "table": "minecraft:chests/village/village_plains_house",
+        "chance": 0.07
+      },
+      {
+        "table": "minecraft:chests/abandoned_mineshaft",
+        "chance": 0.05
+      }
+    ],
+    "tidebound_amulet": [
+      {
+        "table": "minecraft:chests/shipwreck_treasure",
+        "chance": 0.06
+      },
+      {
+        "table": "minecraft:chests/underwater_ruin_big",
+        "chance": 0.07
+      }
+    ],
+    "stormwoven_pendant": [
+      {
+        "table": "minecraft:chests/simple_dungeon",
+        "chance": 0.04
+      },
+      {
+        "table": "minecraft:chests/pillager_outpost",
+        "chance": 0.03
+      }
+    ],
+    "duskleaf_amulet": [
+      {
+        "table": "minecraft:chests/woodland_mansion",
+        "chance": 0.04
+      },
+      {
+        "table": "minecraft:chests/village/village_taiga_house",
+        "chance": 0.05
+      }
+    ],
+    "sunforged_circlet": [
+      {
+        "table": "minecraft:chests/village/village_weaponsmith",
+        "chance": 0.07
+      },
+      {
+        "table": "minecraft:chests/desert_pyramid",
+        "chance": 0.04
+      }
+    ],
+    "ironvine_circlet": [
+      {
+        "table": "minecraft:chests/village/village_armorer",
+        "chance": 0.07
+      },
+      {
+        "table": "minecraft:chests/simple_dungeon",
+        "chance": 0.04
+      }
+    ],
+    "moonstone_circlet": [
+      {
+        "table": "minecraft:chests/stronghold_corridor",
+        "chance": 0.04
+      },
+      {
+        "table": "minecraft:chests/ancient_city",
+        "chance": 0.03
+      }
+    ],
+    "gloomweave_circlet": [
+      {
+        "table": "minecraft:chests/ancient_city",
+        "chance": 0.03
+      },
+      {
+        "table": "minecraft:chests/woodland_mansion",
+        "chance": 0.04
+      }
+    ],
+    "wanderers_anklet": [
+      {
+        "table": "minecraft:chests/village/village_plains_house",
+        "chance": 0.07
+      },
+      {
+        "table": "minecraft:chests/shipwreck_supply",
+        "chance": 0.06
+      }
+    ],
+    "featherfall_anklet": [
+      {
+        "table": "minecraft:chests/simple_dungeon",
+        "chance": 0.05
+      },
+      {
+        "table": "minecraft:chests/abandoned_mineshaft",
+        "chance": 0.05
+      }
+    ],
+    "nightstride_anklet": [
+      {
+        "table": "minecraft:chests/stronghold_library",
+        "chance": 0.04
+      },
+      {
+        "table": "minecraft:chests/ancient_city",
+        "chance": 0.03
+      }
+    ],
+    "galeswept_anklet": [
+      {
+        "table": "minecraft:chests/underwater_ruin_big",
+        "chance": 0.05
+      },
+      {
+        "table": "minecraft:chests/shipwreck_treasure",
+        "chance": 0.05
+      }
+    ],
+    "aether_wings": [
+      {
+        "table": "minecraft:chests/end_city_treasure",
+        "chance": 0.04
+      },
+      {
+        "table": "minecraft:chests/woodland_mansion",
+        "chance": 0.03
       }
     ]
   }

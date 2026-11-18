@@ -117,6 +117,19 @@ PALETTE = {
     "ring_temporal_guard.png": (0.694, 0.93, 0.62),
     "ring_thorned.png": (0.794, 1.00, 0.62),
     "ring_yellow.png": (0.154, 0.55, 0.62),
+    "aether_wings.png": (0.620, 0.60, 0.72),
+    "duskleaf_amulet.png": (0.720, 0.55, 0.62),
+    "featherfall_anklet.png": (0.550, 0.45, 0.86),
+    "galeswept_anklet.png": (0.520, 0.60, 0.75),
+    "gloomweave_circlet.png": (0.750, 0.55, 0.66),
+    "ironvine_circlet.png": (0.300, 0.40, 0.55),
+    "moonstone_circlet.png": (0.620, 0.45, 0.85),
+    "nightstride_anklet.png": (0.680, 0.60, 0.50),
+    "starfall_pendant.png": (0.085, 0.62, 0.80),
+    "stormwoven_pendant.png": (0.600, 0.65, 0.66),
+    "sunforged_circlet.png": (0.120, 0.80, 0.85),
+    "tidebound_amulet.png": (0.500, 0.62, 0.66),
+    "wanderers_anklet.png": (0.100, 0.55, 0.62),
     "ripple_anklet.png": (0.560, 0.72, 0.80),
     "savage_bloodfang_pendant.png": (0.986, 0.74, 0.62),
     "scholars_convergence_ring.png": (0.561, 0.63, 0.62),
@@ -775,6 +788,161 @@ def make_anklet(accent_h, accent_s, accent_v, detail=2, variant=0):
     return c
 
 
+# Hand-drawn masks for the head/back relics.  They are stamped through
+# _draw_emblem, so '.' skips, '#' is solid, 'x' is a recessed groove (used for
+# feather and facet lines) and 'o' is a highlight.  Each mask is authored for
+# the left half and mirrored, so the pair stays perfectly symmetrical.
+
+# Hand-drawn wing masks, authored for the left half and mirrored.  '.' skips,
+# '#' is plumage, 'x' is a feather split (recessed), 'o' is a leading highlight.
+# The outline climbs steeply from the shoulder, levels off across the top of the
+# wing and then steps back down and inboard, so the pair reads as two blades
+# sweeping up and out from the spine.
+
+# Mask-authored head/back relics.  '.' skips, '#' is solid, 'x' is a groove cut
+# into the surface (used for feather splits) and 'o' is a highlight.  Every mask
+# is authored as the left half only and mirrored, so the pair stays symmetrical.
+# They are shaded by make_mask_relic, which lights them like the badges: flat
+# mid tone inside, a stepped edge that is quiet on the upper left and near-black
+# on the lower right, so the silhouette reads at 16px.
+
+# Half-masks are 8 wide so _mirror() can fold them into a 16-wide sprite; the
+# fold is what guarantees a left/right symmetric pair.  Rows are padded with
+# WINGS_TOP_MARGIN blanks on top and the spine gem sits at WINGS_GEM_ROW, which
+# centres the icon vertically instead of letting the wings hug the top edge.
+WINGS_MASKS = {
+    1: (
+        (".......#", ".#....##", ".##..###", ".#######", ".#######",
+         "..######", "...#####", "....####", ".....##.", "......#."),
+        ((6, 3), (5, 5), (4, 7)),
+    ),
+    2: (
+        (".......#", ".#....##", ".##..###", ".#######", ".#######",
+         "..######", "...#####", "....####", ".....##.", "......#."),
+        ((6, 3), (5, 5), (4, 7), (3, 6)),
+    ),
+    3: (
+        ("#......#", "##....##", "###..###", ".#######", ".#######",
+         "..######", "...#####", "....####", ".....##.", "......#."),
+        ((6, 2), (7, 3), (5, 4), (4, 6), (3, 8)),
+    ),
+}
+
+WINGS_TOP_MARGIN = 2
+WINGS_LEFT_MARGIN = 1
+WINGS_GEM_ROW = 12.0
+
+
+def _centre_half(half, grooves):
+    """Inset a wing half and pad it so the folded sprite is centred in 16x16."""
+    top = WINGS_TOP_MARGIN
+    rows = ["." * 8] * top
+    rows += ["." * WINGS_LEFT_MARGIN + row[:8 - WINGS_LEFT_MARGIN] for row in half]
+    rows += ["." * 8] * (N - len(rows))
+    moved = [(gx + WINGS_LEFT_MARGIN, gy + top) for gx, gy in grooves]
+    return tuple(rows), moved
+
+# One open-front band shared by every circlet rarity; the brow stone grows and
+# the band gains studs with rarity, so low tiers never borrow the halo look.
+CIRCLET_BAND = (
+    "........", "........", "........", "........", "........",
+    "...#....", "..###...", ".#####..", "#######.", "#######.",
+    "..####..", "...##...",
+)
+
+CIRCLET_GEMS = {
+    1: (6.4, 1.05),
+    2: (6.4, 1.20),
+    3: (5.8, 1.35),
+}
+
+
+def _mirror(half):
+    return tuple(row + row[::-1] for row in half)
+
+
+def make_mask_relic(half, grooves, hue, sat, val, detail, gem_row, gem_r,
+                    variant=0, mask_ink=None):
+    """Build a symmetrical relic from a half-mask, lit like the badge emblems."""
+    metal = tones(hue, min(0.85, sat * 0.45), min(1.0, val * 0.95 + 0.05))
+    ink = mask_ink or gem_tones(hue, min(1.0, max(0.72, sat)))
+    gem = gem_tones(hue, sat)
+    c = Canvas()
+
+    rows = _mirror(half)
+    grid = [list(r) for r in rows]
+    for gx, gy in grooves:
+        for x in (gx, 15 - gx):
+            if 0 <= gy < len(grid) and grid[gy][x] == "#":
+                grid[gy][x] = "x"
+    mask = ["".join(r) for r in grid]
+
+    cells = {(x, y) for y, row in enumerate(mask)
+             for x, ch in enumerate(row) if ch in "#x"}
+
+    for (x, y) in sorted(cells):
+        if mask[y][x] == "x":
+            c.set(x, y, ink["outline"])
+            continue
+        b = 0.62 - 0.045 * y - 0.08 * abs(x + 0.5 - 8.0) / 7.0
+        if b > 0.46:
+            tone = "spec"
+        elif b > 0.22:
+            tone = "light"
+        elif b > 0.0:
+            tone = "mid"
+        else:
+            tone = "dark"
+        if any((x + ox, y + oy) not in cells
+               for ox, oy in _HOOP_N4):
+            tone = "dark" if tone in ("spec", "light") else "outline"
+        c.set(x, y, ink[tone])
+
+    if gem_r > 0.0:
+        draw_diamond(c, 8.0, gem_row, gem_r + 0.35, metal)
+        if variant % 3 == 0:
+            draw_diamond(c, 8.0, gem_row, gem_r, gem)
+        elif variant % 3 == 1:
+            draw_bead(c, 8.0, gem_row, gem, gem_r * 0.94)
+        else:
+            _gem_shape(c, 8.0, gem_row, gem_r * 0.92, gem, variant)
+        c.set(int(8.0) - 1, int(gem_row) - 1, gem["spec"])
+
+    if detail >= 1:
+        # studs along the band, one step brighter towards the top left
+        for x, y in ((4, 9), (11, 9)):
+            if 0 <= x < N:
+                c.set(x, y, metal["light"])
+    return c
+
+
+def make_wings(accent_h, accent_s, accent_v, detail=2, variant=0):
+    """A symmetrical pair of swept wings over a crystal at the spine."""
+    half, grooves = _centre_half(*WINGS_MASKS[detail])
+    return make_mask_relic(half, grooves, accent_h, accent_s, accent_v, detail,
+                           WINGS_GEM_ROW, (0.0, 0.90, 1.05, 1.20)[detail], variant,
+                           mask_ink=tones(accent_h, min(0.46, accent_s * 0.40),
+                                          min(1.0, accent_v * 0.92 + 0.08)))
+
+
+def make_circlet(accent_h, accent_s, accent_v, detail=2, variant=0):
+    """An open-front head band with a crest gem at the brow (never a closed halo)."""
+    gem_row, gem_r = CIRCLET_GEMS[detail]
+    c = make_mask_relic(CIRCLET_BAND, (), accent_h, accent_s, accent_v, detail,
+                        gem_row, gem_r, variant)
+
+    metal = tones(accent_h, min(0.85, accent_s * 0.45), min(1.0, accent_v * 0.95 + 0.05))
+    gem = gem_tones(accent_h, accent_s)
+    if detail >= 2:
+        for x in (1, 14):
+            c.set(x, 9, metal["light"])
+    if detail >= 3:
+        for x in (2, 13):
+            draw_bead(c, x + 0.5, 9.5, gem, 0.55)
+        c.set(3, 6, metal["spec"])
+    return c
+
+
 def _cord(c, accent_h):
     """A clean two-strand necklace cord meeting at a bail between (7,4) and (8,4)."""
     cord = tones(accent_h, 0.30, 0.34)
@@ -1341,7 +1509,6 @@ UNIQUE_LEFT_ALONE = {
     "arcane_reforging_charm.png",
     # Head/back relics with deliberate, distinct silhouettes.
     "astral_halo.png",
-    "celestial_wings.png",
     "celestial_aegis.png",
     "gilded_circlet.png",
     "halo_celestial_crystal.png",
@@ -1359,6 +1526,10 @@ def category(name):
         return None
     if name in BADGES or name.endswith("_badge.png"):
         return "badge"
+    if "wings" in name:
+        return "wings"
+    if "circlet" in name:
+        return "circlet"
     if "bracelet" in name:
         return "bracelet"
     if "anklet" in name:
@@ -1420,6 +1591,10 @@ def build(name, hue, sat, val, detail=2):
         return make_rune(hue, sat, val, glyph, detail, bloody)
     if kind == "cross":
         return make_cross(hue, sat, val, detail)
+    if kind == "wings":
+        return make_wings(hue, sat, val, detail, glyph)
+    if kind == "circlet":
+        return make_circlet(hue, sat, val, detail, glyph)
     if kind == "charm":
         return make_charm(hue, sat, val, glyph, detail)
     if kind == "badge":
@@ -1437,7 +1612,9 @@ def main():
     args = parser.parse_args()
 
     disk = {f for f in os.listdir(args.src) if f.endswith(".png")}
-    names = sorted(disk | set(BADGES))
+    # palette entries may name sprites that do not exist yet (new relics), so
+    # the pinned identities count as "known" alongside the files on disk
+    names = sorted(disk | set(BADGES) | set(PALETTE))
     if args.only:
         names = [f for f in names if args.only in f]
     rarity = load_rarity()

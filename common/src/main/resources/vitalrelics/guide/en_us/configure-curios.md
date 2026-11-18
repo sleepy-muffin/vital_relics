@@ -228,7 +228,19 @@ Callback rules support `modifier`, `flat`, `minimum`, `ratio_minimum`, `maximum`
 ## Spells
 
 Features
-- Each spell is unique for its unique relic, so there's nothing to worry about it.
+- The same spell name may be carried by several relics. Only one is applied.
+
+  A spell's level is its relic's rarity: `common` < `uncommon` < `rare` < `epic`.
+  Among relics sharing a spell name, the highest level wins, so a rarer relic
+  always upgrades the spell it shares with a plainer one.
+
+  Only within one tier do the spell's own parameters decide, through the
+  optional numeric `priority` parameter (and the default score when it is
+  absent). Registering the same spell on two relics of the *same* tier is
+  rejected at load time, because there would be no way to tell which wins.
+
+  This is how the Celestial Wings outrange the Aether Wings: both cast
+  `teleport`, but at `epic` and `rare` respectively.
 
 Available Spells
 - `teleport`:

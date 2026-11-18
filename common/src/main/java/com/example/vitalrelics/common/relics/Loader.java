@@ -1,6 +1,7 @@
 package com.example.vitalrelics.common.relics;
 
 import com.example.vitalrelics.common.Manifest;
+import com.example.vitalrelics.common.RelicSpells;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -50,6 +51,13 @@ public class Loader {
 
 			instance.relics_.add(loadRelic(rawRelic));
 		}
+
+		/*
+		 * A spell may be shared across tiers (that is how a better relic
+		 * upgrades it), but never within one tier, where there would be no
+		 * way to tell which relic's copy wins.
+		 */
+		RelicSpells.checkNoSameTierSpellDuplicates(instance.relics_);
 	}
 
 

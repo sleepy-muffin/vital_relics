@@ -15,10 +15,10 @@ public class Relic {
 	 *                  Common   Uncommon   Rare   Epic
 	 * Ring              1.0       1.5      2.2     xxx
 	 * Bracelet          1.2       1.8      2.6     xxx
-	 * Feet/Anklet       xxx       2.0      3.0     8.5
-	 * Charm/Pendant     1.3       2.0      3.0     8.5
-	 * Necklace          xxx       2.3      3.4     10.0
-	 * Head              xxx       2.3      3.4     10.0
+	 * Feet/Anklet       xxx       2.0      5.0     10.0
+	 * Charm/Pendant     1.3       2.0      5.0     10.0
+	 * Necklace          xxx       2.3      5.0     10.0
+	 * Head              xxx       2.3      5.0     10.0
 	 *
 	 * So, we'll add new relics for necklace and head later right?
 	 *   it shouldn't be halos for head relics if they are not epic.

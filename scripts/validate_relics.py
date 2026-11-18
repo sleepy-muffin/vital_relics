@@ -187,6 +187,8 @@ def validate_relics(
 
         relics[relic_id] = relic
 
+    validate_spell_uniqueness(relics, path)
+
     materials_root = require_dict(
         load_json(resources / "materials.json"),
         str(resources / "materials.json"),
@@ -221,6 +223,33 @@ def validate_relics(
         material_ids.add(material_id)
 
     return relics, material_ids
+
+
+# A spell's level is its relic's rarity (common < uncommon < rare < epic), so
+# the same spell on a rarer relic always wins. Two relics of one tier sharing a
+# spell name would make that rule meaningless, so it is an error.
+def validate_spell_uniqueness(
+    relics: dict[str, dict[str, Any]],
+    path: Path,
+) -> None:
+    seen: dict[tuple[str, str], str] = {}
+
+    for relic_id, relic in relics.items():
+        rarity = relic.get("rarity", "common")
+
+        for spell_id in relic.get("available_spells", {}):
+            key = (rarity, spell_id)
+            previous = seen.get(key)
+
+            if previous is not None and previous != relic_id:
+                fail(
+                    f"{path}: spell {spell_id!r} is used by both "
+                    f"{previous!r} and {relic_id!r}, which share the "
+                    f"{rarity!r} tier; the same spell may only repeat "
+                    "across different tiers"
+                )
+
+            seen[key] = relic_id
 
 
 def validate_translations(

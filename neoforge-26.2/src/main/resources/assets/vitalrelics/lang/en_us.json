@@ -3,5 +3,7 @@
   "key.vitalrelics.cast_spell": "Cast Spell",
   "key.vitalrelics.switch_spell": "Switch Spell",
 
-  "item.vitalrelics.guide_book": "Vital Relics Guide"
+  "item.vitalrelics.guide_book": "Vital Relics Guide",
+  "curios.identifier.feet": "Feet",
+  "curios.modifiers.feet": "When on feet:"
 }

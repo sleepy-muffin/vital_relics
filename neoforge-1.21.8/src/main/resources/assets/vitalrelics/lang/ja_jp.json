@@ -3,5 +3,7 @@
   "key.vitalrelics.cast_spell": "スペルを発動",
   "key.vitalrelics.switch_spell": "スペルを切り替え",
 
-  "item.vitalrelics.guide_book": "Vital Relics ガイド"
+  "item.vitalrelics.guide_book": "Vital Relics ガイド",
+  "curios.identifier.feet": "足",
+  "curios.modifiers.feet": "足に装備したとき："
 }
