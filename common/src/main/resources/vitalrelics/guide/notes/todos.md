@@ -2,7 +2,6 @@
 
 - `borebolt` should replace fluid with air.
 - `compel_attack` did the reverse, it should be done by making current hurt by the nearest living entity instead. 
-- `flight` may stop working after entering a new dimension. But re-equiping the relic may fix it.
 
 ## Discovered Bugs
 
