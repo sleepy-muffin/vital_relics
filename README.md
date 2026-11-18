@@ -111,16 +111,6 @@ Vital Relics is actively developed.
 
 If you encounter a reproducible bug, compatibility problem, or crash, please report it through the [GitHub Issues page](https://github.com/sleepy-muffin/vital-relics/issues) with relevant logs and configuration details when possible.
 
-## Screenshots
-
-![Vital Relics](https://github.com/user-attachments/assets/a3e49454-14e9-4b9c-894c-727dfe9d1050)
-
-![Vital Relics](https://github.com/user-attachments/assets/aabf218f-aa11-4787-9083-5bf32bb71a3e)
-
-![Vital Relics](https://github.com/user-attachments/assets/c931d595-af92-4843-b82f-299709a0f4a0)
-
-![Vital Relics](https://github.com/user-attachments/assets/5a2aa56e-6b22-4ba3-9126-f28d97e0796d)
-
 ## License
 
 MIT
