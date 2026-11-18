@@ -788,6 +788,61 @@ def make_anklet(accent_h, accent_s, accent_v, detail=2, variant=0):
     return c
 
 
+def _blossom(c, cx, cy, petal, core, scale=1.0):
+    """Five round petals around a bright core - the shared flower motif."""
+    d = 1.9 * scale
+    for ox, oy in ((0.0, -1.0), (-0.95, -0.31), (0.95, -0.31),
+                   (-0.59, 0.81), (0.59, 0.81)):
+        draw_bead(c, cx + ox * d, cy + oy * d, petal, 1.05 * scale)
+    draw_bead(c, cx, cy, core, 0.92 * scale)
+
+
+def _charm_band(metal):
+    """The slim upper hoop shared by the hand-built epic anklets."""
+    c = Canvas()
+    _hoop(c, 8.0, 3.5, 6.4, 2.52, 5.1, 1.42, metal)
+    # a short bail dropping from the front of the band to the charm
+    for y in (5, 6, 7):
+        c.set(7, y, metal["light"])
+    return c
+
+
+def make_cherry_anklet(accent_h, accent_s, accent_v, detail=3, variant=0):
+    """A delicate band with a single cherry blossom and two leaf sprigs.
+
+    Drawn apart from make_anklet so the epic piece reads as a flower on a
+    strand rather than another beaded hoop with a stone hung off it.
+    """
+    metal = tones(accent_h, min(0.85, accent_s * 0.45),
+                  min(1.0, accent_v * 0.95 + 0.05))
+    petal = gem_tones(accent_h, 0.44)
+    core = tones(0.135, 0.85, 1.0)
+    leaf = tones(0.33, 0.52, 0.58)
+    leaf_lit = tones(0.33, 0.52, 0.70)
+    c = _charm_band(metal)
+    for sx in (-1.0, 1.0):
+        draw_bead(c, 8.0 + sx * 4.4, 9.2, leaf, 1.2)
+        draw_bead(c, 8.0 + sx * 4.4, 9.2, leaf_lit, 0.55)
+    _blossom(c, 8.0, 11.6, petal, core, 1.0)
+    return c
+
+
+def make_tidebloom_anklet(accent_h, accent_s, accent_v, detail=3, variant=0):
+    """A band with a three-crest wave of foam-capped droplets hanging under it."""
+    metal = tones(accent_h, min(0.85, accent_s * 0.45),
+                  min(1.0, accent_v * 0.95 + 0.05))
+    water = gem_tones(accent_h, 0.48)
+    foam = tones(0.52, 0.10, 1.0)
+    c = _charm_band(metal)
+    draw_bead(c, 8.0, 11.9, water, 1.85)
+    draw_bead(c, 5.3, 10.5, water, 1.30)
+    draw_bead(c, 10.7, 10.5, water, 1.30)
+    draw_bead(c, 8.0, 10.6, foam, 0.72)
+    draw_bead(c, 5.3, 9.7, foam, 0.50)
+    draw_bead(c, 10.7, 9.7, foam, 0.50)
+    return c
+
+
 # Hand-drawn masks for the head/back relics.  They are stamped through
 # _draw_emblem, so '.' skips, '#' is solid, 'x' is a recessed groove (used for
 # feather and facet lines) and 'o' is a highlight.  Each mask is authored for
@@ -811,26 +866,32 @@ def make_anklet(accent_h, accent_s, accent_v, detail=2, variant=0):
 # WINGS_TOP_MARGIN blanks on top and the spine gem sits at WINGS_GEM_ROW, which
 # centres the icon vertically instead of letting the wings hug the top edge.
 WINGS_MASKS = {
+    # Authored as the left half only, and mirrored by _mirror().  The halves
+    # reach column 7 (the spine) so the folded pair keeps its full 14px span;
+    # rarity adds feather splits inwards instead of shrinking the outline.
     1: (
-        (".......#", ".#....##", ".##..###", ".#######", ".#######",
-         "..######", "...#####", "....####", ".....##.", "......#."),
-        ((6, 3), (5, 5), (4, 7)),
+        (".....#..", "....##..", "...###..", "..####..", ".#####..",
+         ".#######", "..######", "...####.", "....##..", ".....#.."),
+        ((6, 6),),
     ),
     2: (
-        (".......#", ".#....##", ".##..###", ".#######", ".#######",
-         "..######", "...#####", "....####", ".....##.", "......#."),
-        ((6, 3), (5, 5), (4, 7), (3, 6)),
+        (".....#..", "....##..", "...###..", "..###...", ".#####..",
+         ".#######", "..######", "...###.#", "....##.#", ".....##."),
+        ((6, 5), (5, 7)),
     ),
+    # Epic: the trailing edge breaks into stepped feather tips and the inner
+    # edge splits, so the silhouette is busier without growing past 14px.
     3: (
-        ("#......#", "##....##", "###..###", ".#######", ".#######",
-         "..######", "...#####", "....####", ".....##.", "......#."),
-        ((6, 2), (7, 3), (5, 4), (4, 6), (3, 8)),
+        (".....#..", "....##..", "...###..", "..####..", ".#####..",
+         ".#######", "..#####.", ".##.##.#", "...###.#", "....#.#.",
+         "....##.."),
+        ((6, 6), (5, 8)),
     ),
 }
 
 WINGS_TOP_MARGIN = 2
-WINGS_LEFT_MARGIN = 1
-WINGS_GEM_ROW = 12.0
+WINGS_LEFT_MARGIN = 0
+WINGS_GEM_ROW = 12.9
 
 
 def _centre_half(half, grooves):
@@ -1578,6 +1639,10 @@ def build(name, hue, sat, val, detail=2):
         return make_ring(hue, sat, val, detail, glyph)
     if kind == "bracelet":
         return make_bracelet(hue, sat, val, detail, glyph)
+    if name.startswith("cherry_anklet."):
+        return make_cherry_anklet(hue, sat, val, detail, glyph)
+    if name.startswith("tidebloom_anklet."):
+        return make_tidebloom_anklet(hue, sat, val, detail, glyph)
     if kind == "anklet":
         return make_anklet(hue, sat, val, detail, glyph)
     if kind == "amulet":

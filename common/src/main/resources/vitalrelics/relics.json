@@ -206,7 +206,7 @@
       "curio_slot": "ring",
       "rarity": "rare",
       "passive_skills": {
-        "experience_convergence": 1
+        "experience_convergence": 0.5
       }
     },
     {
