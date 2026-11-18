@@ -1,8 +1,5 @@
 # TODO
 
-- `borebolt` should replace fluid with air.
-- `compel_attack` did the reverse, it should be done by making current hurt by the nearest living entity instead. 
-
 ## Discovered Bugs
 
 ## New Relic Items
