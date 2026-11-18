@@ -34,8 +34,33 @@ public final class MyEvents {
         if (level <= 0.0)
             return amount;
 
-        final double multiplier = 1.0 + level * (experienceNeededForNextLevel / 7.0 - 1.0);
+        final double multiplier = experienceConvergenceMultiplier(
+                experienceNeededForNextLevel, level);
         return (int) Math.min(Integer.MAX_VALUE, Math.max(amount, Math.round(amount * multiplier)));
+    }
+
+    /**
+     * Scales experience gains so the effort per level (the experience needed
+     * divided by the multiplier) moves linearly from the vanilla cost at level
+     * 0 to the flat first-level cost at level 1.
+     * <p>
+     * Interpolating the effort - not the multiplier - makes the level read as a
+     * fraction of the way to full convergence: half strength halves the extra
+     * work. Interpolating the multiplier instead made 0.5 land almost on top of
+     * 1.0, because the multiplier grows faster than the effort shrinks.
+     */
+    static double experienceConvergenceMultiplier(
+            final int experienceNeededForNextLevel, final double level) {
+        // 7 is the experience required to reach level 1, so a fully converged
+        // wearer always spends that much per level.
+        if (experienceNeededForNextLevel <= 0)
+            return 1.0;
+
+        final double flatCost = 7.0;
+        final double clamped = Math.min(1.0, Math.max(0.0, level));
+        final double effort = experienceNeededForNextLevel
+                - clamped * (experienceNeededForNextLevel - flatCost);
+        return Math.max(1.0, experienceNeededForNextLevel / effort);
     }
 
     public static void onLivingEntityTick(
