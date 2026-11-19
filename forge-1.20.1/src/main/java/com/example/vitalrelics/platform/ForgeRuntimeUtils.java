@@ -19,10 +19,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.level.ClipContext;
@@ -991,10 +993,27 @@ public final class ForgeRuntimeUtils implements MyRuntimeUtils {
 		}
 
 		enchantments.remove(selected);
+
+		/*
+		 * On 1.20.1 EnchantmentHelper.setEnchantments only merges entries into
+		 * an enchanted book's stored list; it never drops the ones that are no
+		 * longer in the map. Clear the list first so the removed enchantment
+		 * actually leaves the book.
+		 */
+		if (stack.is(Items.ENCHANTED_BOOK))
+			stack.removeTagKey(EnchantedBookItem.TAG_STORED_ENCHANTMENTS);
+
 		EnchantmentHelper.setEnchantments(enchantments, stack);
 
+		/*
+		 * ItemStack.enchant always writes the "Enchantments" tag, which an
+		 * enchanted book ignores; books must use StoredEnchantments instead.
+		 */
 		final ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
-		book.enchant(selected, selectedLevel);
+		EnchantedBookItem.addEnchantment(
+				book,
+				new EnchantmentInstance(selected, selectedLevel)
+		);
 
 		if (!player.isCreative())
 			offhand.shrink(1);
