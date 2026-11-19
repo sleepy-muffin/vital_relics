@@ -912,7 +912,7 @@
       "available_spells": {
         "teleport": {
           "range": 50,
-          "recovery": 0.25
+          "recovery": 0.5
         }
       }
     },
